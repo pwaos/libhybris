@@ -1,4 +1,4 @@
-libhybris (0.1.0+git20180212-0gemian1) UNRELEASED; urgency=medium
+libhybris (0.1.0+gemian1) UNRELEASED; urgency=medium
 
   * New snapshot
   * Add X11 EGL platform changes for Gemini PDA
