@@ -61,7 +61,8 @@ ifeq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH), arm64))
 ARCH_CONFIGURATION = \
 	--enable-arch=arm64 \
 	--enable-mali-quirks \
-	--enable-adreno-quirks
+	--enable-adreno-quirks \
+	--with-default-egl-platform=x11
 endif
 ifeq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH), i386))
 ARCH_CONFIGURATION = \
