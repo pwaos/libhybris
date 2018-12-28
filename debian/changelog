@@ -1,3 +1,9 @@
+libhybris (0.1.0+gemian2) UNRELEASED; urgency=medium
+
+  * Decouple drihybris from present extension detection for X11 platform
+
+ -- TheKit <nekit1000@gmail.com>  Fri, 28 Dec 2018 23:00:37 +0100
+
 libhybris (0.1.0+gemian1) UNRELEASED; urgency=medium
 
   * New snapshot
