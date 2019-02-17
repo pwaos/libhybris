@@ -17,7 +17,6 @@ extern "C" {
 
 static gralloc_module_t *gralloc = 0;
 static alloc_device_t *alloc = 0;
-static HWComposerNativeWindow *_nativewindow = NULL;
 
 extern "C" void hwcomposerws_init_module(struct ws_egl_interface *egl_iface)
 {
@@ -55,23 +54,18 @@ extern "C" void hwcomposerws_Terminate(_EGLDisplay *dpy)
 extern "C" EGLNativeWindowType hwcomposerws_CreateWindow(EGLNativeWindowType win, _EGLDisplay *display)
 {
 	assert (gralloc != NULL);
-	assert (_nativewindow == NULL);
 
 	HWComposerNativeWindow *window = static_cast<HWComposerNativeWindow *>((ANativeWindow *) win);
 	window->setup(gralloc, alloc);
-	_nativewindow = window;
-	_nativewindow->common.incRef(&_nativewindow->common);
-	return (EGLNativeWindowType) static_cast<struct ANativeWindow *>(_nativewindow);
+	window->common.incRef(&window->common);
+	return (EGLNativeWindowType) static_cast<struct ANativeWindow *>(window);
 }
 
 extern "C" void hwcomposerws_DestroyWindow(EGLNativeWindowType win)
 {
-	assert (_nativewindow != NULL);
-	assert (static_cast<HWComposerNativeWindow *>((struct ANativeWindow *)win) == _nativewindow);
-
-	_nativewindow->common.decRef(&_nativewindow->common);
+	HWComposerNativeWindow *window = static_cast<HWComposerNativeWindow *>((ANativeWindow *) win);
+	window->common.decRef(&window->common);
 	/* We are done with it, refcounting will delete the window when appropriate */
-	_nativewindow = NULL;
 }
 
 extern "C" __eglMustCastToProperFunctionPointerType hwcomposerws_eglGetProcAddress(const char *procname) 
